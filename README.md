@@ -11,10 +11,19 @@ Privacy policies are often excessively long, filled with legal jargon, and diffi
 - **Direct PDF Support:** Upload official PDF documents directly for quick processing without manual text extraction.
 
 ## Tech Stack Used
-- **Backend:** Flask (Python)
-- **AI / NLP Models:** Hugging Face `transformers` library (BART for summarization, DistilBERT for QA)
-- **PDF Processing:** `PyMuPDF` (fitz)
-- **Frontend:** HTML/CSS (Jinja2 Templates)
+
+### Frameworks & Libraries
+- **Flask (Python):** Used as the primary backend web framework. It was chosen because it is lightweight, fast to set up, and seamlessly integrates with Python-based machine learning pipelines.
+- **Hugging Face `transformers`:** A state-of-the-art NLP library used to easily download, load, and execute pre-trained AI models without needing to train them from scratch.
+- **PyTorch (`torch`):** The underlying deep learning framework used by the Hugging Face library to run the NLP models efficiently.
+- **PyMuPDF (`fitz`):** A high-performance PDF processing library. It was chosen for its speed and reliability in extracting clean, raw text from uploaded privacy policy documents.
+
+### Algorithms & Models
+- **BART (`facebook/bart-large-cnn`):** A sequence-to-sequence transformer model. It was specifically selected for the summarization task because it excels at *abstractive summarization*—meaning it can understand the context of lengthy legal texts and rewrite them into coherent, concise summaries rather than just extracting existing sentences.
+- **DistilBERT (`distilbert-base-uncased-distilled-squad`):** A distilled, lighter version of the BERT model fine-tuned on the SQuAD dataset for question answering. It was chosen because it provides high accuracy in extracting exact answers from a given context (like a privacy policy) while being significantly faster and less resource-intensive than the full BERT model.
+
+### Frontend
+- **HTML / CSS & Jinja2:** The user interface is built with standard web technologies. Jinja2 templates are used to dynamically render the AI-generated summaries and answers directly from the Flask backend to the user's browser.
 
 ## Prerequisites
 - Python 3.7+ installed on your system.
