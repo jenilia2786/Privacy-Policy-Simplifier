@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h2 class="fw-bold">Policy Analysis Dashboard</h2>
+        <p class="text-muted">Upload a privacy policy or paste its text to get started.</p>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Input Section -->
+    <div class="col-lg-6 mb-4">
+        <div class="card p-4 h-100">
+            <h5 class="mb-3">1. Input Policy</h5>
+            
+            <form method="POST" enctype="multipart/form-data" class="mb-4">
+                <input type="hidden" name="action" value="upload">
+                <label class="form-label fw-bold">Upload PDF</label>
+                <div class="input-group">
+                    <input type="file" name="pdf" class="form-control" accept=".pdf" required>
+                    <button type="submit" class="btn btn-outline-primary">Extract Text</button>
+                </div>
+            </form>
+
+            <form method="POST">
+                <input type="hidden" name="action" value="simplify">
+                <label class="form-label fw-bold">Raw Text</label>
+                <textarea name="raw_text" class="form-control mb-3" rows="10" placeholder="Paste privacy policy text here..." required>{{ original_text }}</textarea>
+                <button type="submit" class="btn btn-primary w-100">Summarize Policy</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Output Section -->
+    <div class="col-lg-6 mb-4">
+        <div class="card p-4 h-100 bg-white">
+            <h5 class="mb-3">2. Analysis & Summary</h5>
+            
+            {% if simplified %}
+                <div class="mb-4">
+                    <h6 class="fw-bold text-success">✨ AI Summary:</h6>
+                    <div class="p-3 border rounded bg-light" style="white-space: pre-wrap; font-size: 0.95rem;">{{ simplified }}</div>
+                </div>
+            {% else %}
+                <div class="text-center text-muted p-5 mb-4 border rounded bg-light">
+                    <em>Summary will appear here after analysis.</em>
+                </div>
+            {% endif %}
+
+            <hr class="my-4">
+            
+            <h5 class="mb-3">3. Ask a Question</h5>
+            <form method="POST">
+                <input type="hidden" name="action" value="ask">
+                <input type="hidden" name="raw_text" value="{{ original_text }}">
+                <div class="mb-3">
+                    <label class="form-label">What do you want to know about this policy?</label>
+                    <input type="text" name="question" class="form-control" placeholder="e.g., Do they share data with third parties?" value="{{ question }}" required {% if not original_text %}disabled{% endif %}>
+                </div>
+                <button type="submit" class="btn btn-dark w-100" {% if not original_text %}disabled{% endif %}>Find Answer</button>
+            </form>
+
+            {% if answer %}
+                <div class="mt-4 p-3 alert alert-info rounded shadow-sm border-info">
+                    <h6 class="fw-bold text-info-emphasis mb-2">Q: {{ question }}</h6>
+                    <p class="mb-0 text-dark"><strong>A:</strong> {{ answer }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

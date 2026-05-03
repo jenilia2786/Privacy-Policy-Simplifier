@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row align-items-center justify-content-center text-center mt-5">
+    <div class="col-lg-8">
+        <h1 class="display-4 fw-bold text-dark mb-3">Understand Privacy Policies in Seconds</h1>
+        <p class="lead text-muted mb-5">PolicyLens uses advanced AI to summarize lengthy legal documents and answer your specific questions. Stop blindly agreeing to terms you don't understand.</p>
+        
+        <div>
+            <a href="{{ url_for('signup') }}" class="btn btn-primary btn-lg px-5 py-3 shadow-sm">Get Started for Free</a>
+            <a href="{{ url_for('login') }}" class="btn btn-outline-secondary btn-lg px-5 py-3 ms-3">Login</a>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5 pt-5 text-center">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 p-4">
+            <h3 class="mb-3">📄 AI Summarization</h3>
+            <p class="text-muted">Upload a PDF or paste text. Our BART model generates a concise, readable summary of the core points.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 p-4">
+            <h3 class="mb-3">❓ Contextual Q&A</h3>
+            <p class="text-muted">Ask questions like "Do they sell my data?" and get precise answers extracted directly from the text.</p>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 p-4">
+            <h3 class="mb-3">⚡ Lightning Fast</h3>
+            <p class="text-muted">Powered by state-of-the-art NLP models running efficiently. Get your answers in seconds, not hours.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
